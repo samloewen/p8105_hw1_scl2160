@@ -86,6 +86,7 @@ Make a scatterplot of y vs x; color points using the logical variable (adding co
 
 ```{r}
 ggplot(df_p2, aes(x=x, y=y, color = log_vec_2)) + geom_point()
+ggsave("scatter_plot.pdf", height = 4, width = 6)
 ggplot(df_p2, aes(x=x, y=y, color = num_vec_2)) + geom_point()
 ggplot(df_p2, aes(x=x, y=y, color = factor_vec_2)) + geom_point()
 
