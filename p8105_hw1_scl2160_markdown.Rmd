@@ -1,0 +1,94 @@
+---
+title: "p8105_hw1_scl2160"
+author: "Sam Loewen"
+date: "9/18/2019"
+output: html_document
+---
+
+## Problem 1
+
+First I am creating a dataframe that meets these requirements:
+
+a random sample of size 8 from a standard Normal distribution
+a logical vector indicating whether elements of the sample are greater than 0
+a character vector of length 8
+a factor vector of length 8, with 3 different factor “levels”
+
+```{r create_df}
+library(tidyverse)
+set.seed(3471)
+df_p1 = tibble(
+  norm_samp = rnorm(8),
+  log_vec = norm_samp > 0,
+  char_vec = c(length = 8),
+  factor_vec = factor(c("pug","lab","chow","chow","lab","chow","pug","lab"))
+)
+```
+
+When I take the mean each variable in my dataframe I can only get the mean of 'norm_samp' and 'log_vec',  and 'char_vec'.
+
+```{r means}
+mean(pull(df_p1, norm_samp))
+mean(pull(df_p1, log_vec))
+mean(pull(df_p1, char_vec))
+mean(pull(df_p1, factor_vec))
+```
+
+Next I will write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output).
+
+```{r as_numeric}
+eval = FALSE
+as.numeric(pull(df_p1,log_vec))
+as.numeric(pull(df_p1,char_vec))
+as.numeric(pull(df_p1,factor_vec))
+```
+
+What happens, and why? Does this help explain what happens when you try to take the mean?
+
+In a second code chunk:
+
+convert the logical vector to numeric, and multiply the random sample by the result
+convert the logical vector to a factor, and multiply the random sample by the result
+convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
+
+```{r var_change}
+eval = FALSE
+as.numeric(pull(df_p1, log_vec))*(pull(df_p1, norm_samp))
+as.factor(pull(df_p1, log_vec))*(pull(df_p1, norm_samp))
+as.numeric((as.factor(pull(df_p1, log_vec))))*(pull(df_p1, norm_samp))
+```
+
+
+## Problem 2
+
+First I will create a data frame comprised of:
+x: a random sample of size 500 from a standard Normal distribution
+y: a random sample of size 500 from a standard Normal distribution
+A logical vector indicating whether x + y > 1
+A numeric vector created by coercing the above logical vector
+A factor vector created by coercing the above logical vector
+
+```{r x_y}
+library(tidyverse)
+set.seed(2345)
+df_p2 = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  log_vec_2 = x + y > 1,
+  num_vec_2 = as.numeric(log_vec_2),
+  factor_vec_2 = as.numeric(log_vec_2)
+)
+```
+
+My data set has `r nrow(df_p2)` rows and `r ncol(df_p2)` columns. The mean of variable x is `r mean(pull(df_p2, x))`, the median is `r median(pull(df_p2, x))`, and the standard deviation is `r sd(pull(df_p2, x))`. The proportion of cases for which x + Y > 1 is `r mean(pull(df_p2, log_vec_2))`.
+
+Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
+
+```{r}
+ggplot(df_p2, aes(x=x, y=y, color = log_vec_2)) + geom_point()
+ggplot(df_p2, aes(x=x, y=y, color = num_vec_2)) + geom_point()
+ggplot(df_p2, aes(x=x, y=y, color = factor_vec_2)) + geom_point()
+
+```
+
+Export your first scatterplot to your project directory using ggsave.
