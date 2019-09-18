@@ -2,7 +2,7 @@
 title: "p8105_hw1_scl2160"
 author: "Sam Loewen"
 date: "9/18/2019"
-output: html_document
+output: github_document
 ---
 
 ## Problem 1
@@ -20,9 +20,16 @@ set.seed(3471)
 df_p1 = tibble(
   norm_samp = rnorm(8),
   log_vec = norm_samp > 0,
-  char_vec = c(length = 8),
+  char_vec = c("dog","cat", "puppy", "kitten", "eggs", "sandwich", "beer", "pencil"),
   factor_vec = factor(c("pug","lab","chow","chow","lab","chow","pug","lab"))
 )
+```
+
+```{r}
+echo = FALSE
+is.character(pull(df_p1, char_vec))
+is.factor(pull(df_p1, factor_vec))
+levels(pull(df_p1, factor_vec))
 ```
 
 When I take the mean each variable in my dataframe I can only get the mean of 'norm_samp' and 'log_vec',  and 'char_vec'.
@@ -37,7 +44,7 @@ mean(pull(df_p1, factor_vec))
 Next I will write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output).
 
 ```{r as_numeric}
-eval = FALSE
+echo = FALSE
 as.numeric(pull(df_p1,log_vec))
 as.numeric(pull(df_p1,char_vec))
 as.numeric(pull(df_p1,factor_vec))
@@ -52,7 +59,7 @@ convert the logical vector to a factor, and multiply the random sample by the re
 convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 
 ```{r var_change}
-eval = FALSE
+echo = FALSE
 as.numeric(pull(df_p1, log_vec))*(pull(df_p1, norm_samp))
 as.factor(pull(df_p1, log_vec))*(pull(df_p1, norm_samp))
 as.numeric((as.factor(pull(df_p1, log_vec))))*(pull(df_p1, norm_samp))
