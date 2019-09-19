@@ -29,17 +29,16 @@ mean(pull(df_p1, log_vec))
 mean(pull(df_p1, char_vec))
 mean(pull(df_p1, factor_vec))
 
-echo = FALSE
+include = FALSE
 as.numeric(pull(df_p1,log_vec))
 as.numeric(pull(df_p1,char_vec))
 as.numeric(pull(df_p1,factor_vec))
 
 ```
+
 When I take the mean of each variable in my dataframe I can only get the mean of 'norm_samp' and 'log_vec', as they are the only numeric variables.
 
-Next I will write a code chunk that applies the as.numeric function to the logical, character, and factor variables.
-
-My logic vector and factor vector were able to be converted to numeric, but my character variable was not.
+Above I applied the as.numeric function to the logical, character, and factor variables.My logic vector and factor vector were able to be converted to numeric, but my character variable was not. The as.numeric function converted both vectors into coded numbers. Because they were able to be converted, we were able to take the mean. The character variable was not able to be converted so we could not take the mean.
 
 I will now: 
 
@@ -66,7 +65,6 @@ First I will create a data frame comprised of:
 *   A factor vector created by coercing the above logical vector
 
 ```{r x_y}
-library(tidyverse)
 set.seed(2345)
 df_p2 = tibble(
   x = rnorm(500),
