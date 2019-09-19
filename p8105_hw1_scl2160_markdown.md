@@ -20,14 +20,14 @@ First I am creating a dataframe that meets these requirements:
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ---------------------------------------------------------------- tidyverse 1.2.1 --
+    ## -- Attaching packages ---------------------------------------------- tidyverse 1.2.1 --
 
     ## v ggplot2 3.2.1     v purrr   0.3.2
     ## v tibble  2.1.3     v dplyr   0.8.3
     ## v tidyr   0.8.3     v stringr 1.4.0
     ## v readr   1.3.1     v forcats 0.4.0
 
-    ## -- Conflicts ------------------------------------------------------------------- tidyverse_conflicts() --
+    ## -- Conflicts ------------------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -39,6 +39,8 @@ df_p1 = tibble(
   char_vec = c("dog","cat", "puppy", "kitten", "eggs", "sandwich", "beer", "pencil"),
   factor_vec = factor(c("pug","lab","chow","chow","lab","chow","pug","lab"))
 )
+
+#Now I find the means of each variable:
 
 mean(pull(df_p1, norm_samp))
 ```
@@ -70,25 +72,11 @@ mean(pull(df_p1, factor_vec))
     ## [1] NA
 
 ``` r
-include = FALSE
+#Next I will the as.numeric function to my logic, character, and factor vector.
 as.numeric(pull(df_p1,log_vec))
-```
-
-    ## [1] 1 1 0 0 0 1 1 0
-
-``` r
 as.numeric(pull(df_p1,char_vec))
-```
-
-    ## Warning: NAs introduced by coercion
-
-    ## [1] NA NA NA NA NA NA NA NA
-
-``` r
 as.numeric(pull(df_p1,factor_vec))
 ```
-
-    ## [1] 3 2 1 1 2 1 3 2
 
 When I take the mean of each variable in my dataframe I can only get the
 mean of ‘norm\_samp’ and ‘log\_vec’, as they are the only numeric
@@ -155,7 +143,7 @@ df_p2 = tibble(
   y = rnorm(500),
   log_vec_2 = x + y > 1,
   num_vec_2 = as.numeric(log_vec_2),
-  factor_vec_2 = as.numeric(log_vec_2)
+  factor_vec_2 = as.factor(log_vec_2)
 )
 ```
 
@@ -186,5 +174,8 @@ ggplot(df_p2, aes(x=x, y=y, color = factor_vec_2)) + geom_point()
 
 ![](p8105_hw1_scl2160_markdown_files/figure-gfm/scatter_plots-3.png)<!-- -->
 
-In the second and third plots the scale of our points is 0-1. Both
-appear to be highly segmented between 0s and 1s.
+The first and third plots are based on true/false binary vectors, so we
+only have two colors in our color scale. The second plot is based on a
+binary vector translated to a numeric variable. Our color scale is a
+gradient reflecting the range of a numeric variable, but we only see two
+colors in our plot as the values come from our vector variable (0,1).
