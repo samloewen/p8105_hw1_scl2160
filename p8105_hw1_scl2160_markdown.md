@@ -7,24 +7,27 @@ Sam Loewen
 
 First I am creating a dataframe that meets these requirements:
 
-a random sample of size 8 from a standard Normal distribution a logical
-vector indicating whether elements of the sample are greater than 0 a
-character vector of length 8 a factor vector of length 8, with 3
-different factor
+  - a random sample of size 8 from a standard Normal distribution
+  - a logical vector indicating whether elements of the sample are
+    greater than 0
+  - a character vector of length 8
+  - a factor vector of length 8, with 3 different factor
     “levels”
+
+<!-- end list -->
 
 ``` r
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ------------------------------------------------------------------------ tidyverse 1.2.1 --
+    ## -- Attaching packages -------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --
 
     ## v ggplot2 3.2.1     v purrr   0.3.2
     ## v tibble  2.1.3     v dplyr   0.8.3
     ## v tidyr   0.8.3     v stringr 1.4.0
     ## v readr   1.3.1     v forcats 0.4.0
 
-    ## -- Conflicts --------------------------------------------------------------------------- tidyverse_conflicts() --
+    ## -- Conflicts ----------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -38,28 +41,9 @@ df_p1 = tibble(
 )
 ```
 
-``` r
-echo = FALSE
-is.character(pull(df_p1, char_vec))
-```
-
-    ## [1] TRUE
-
-``` r
-is.factor(pull(df_p1, factor_vec))
-```
-
-    ## [1] TRUE
-
-``` r
-levels(pull(df_p1, factor_vec))
-```
-
-    ## [1] "chow" "lab"  "pug"
-
-When I take the mean each variable in my dataframe I can only get the
-mean of ‘norm\_samp’ and ‘log\_vec’, and
-    ‘char\_vec’.
+When I take the mean of each variable in my dataframe I can only get the
+mean of ‘norm\_samp’ and ‘log\_vec’, as they are the only numeric
+variables.
 
 ``` r
 mean(pull(df_p1, norm_samp))
@@ -92,8 +76,7 @@ mean(pull(df_p1, factor_vec))
     ## [1] NA
 
 Next I will write a code chunk that applies the as.numeric function to
-the logical, character, and factor variables (please show this chunk but
-not the output).
+the logical, character, and factor variables.
 
 ``` r
 echo = FALSE
@@ -116,19 +99,22 @@ as.numeric(pull(df_p1,factor_vec))
 
     ## [1] 3 2 1 1 2 1 3 2
 
-What happens, and why? Does this help explain what happens when you try
-to take the mean?
+My logic vector and factor vector were able to be converted to numeric,
+but my character variable was not.
 
-In a second code chunk:
+I will now:
 
-convert the logical vector to numeric, and multiply the random sample by
-the result convert the logical vector to a factor, and multiply the
-random sample by the result convert the logical vector to a factor and
-then convert the result to numeric, and multiply the random sample by
-the result
+  - convert the logical vector to numeric, and multiply the random
+    sample by the result
+  - convert the logical vector to a factor, and multiply the random
+    sample by the result
+  - convert the logical vector to a factor and then convert the result
+    to numeric, and multiply the random sample by the
+    result
+
+<!-- end list -->
 
 ``` r
-echo = FALSE
 as.numeric(pull(df_p1, log_vec))*(pull(df_p1, norm_samp))
 ```
 
@@ -153,12 +139,15 @@ as.numeric((as.factor(pull(df_p1, log_vec))))*(pull(df_p1, norm_samp))
 
 ## Problem 2
 
-First I will create a data frame comprised of: x: a random sample of
-size 500 from a standard Normal distribution y: a random sample of size
-500 from a standard Normal distribution A logical vector indicating
-whether x + y \> 1 A numeric vector created by coercing the above
-logical vector A factor vector created by coercing the above logical
-vector
+First I will create a data frame comprised of:
+
+  - x: a random sample of size 500 from a standard Normal distribution
+  - y: a random sample of size 500 from a standard Normal distribution
+  - A logical vector indicating whether x + y \> 1
+  - A numeric vector created by coercing the above logical vector
+  - A factor vector created by coercing the above logical vector
+
+<!-- end list -->
 
 ``` r
 library(tidyverse)
@@ -176,29 +165,28 @@ My data set has 500 rows and 5 columns. The mean of variable x is
 -0.02736, the median is -0.0534419, and the standard deviation is
 0.9758219. The proportion of cases for which x + Y \> 1 is 0.216.
 
-Make a scatterplot of y vs x; color points using the logical variable
-(adding color = … inside of aes in your ggplot code should help). Make a
-second and third scatterplot that color points using the numeric and
-factor variables, respectively, and comment on the color
-scales.
+Next I will make a scatterplot of y vs x that color points using the
+logical, numeric, and factor
+variables.
 
 ``` r
 ggplot(df_p2, aes(x=x, y=y, color = log_vec_2)) + geom_point()
 ```
 
-![](p8105_hw1_scl2160_markdown_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](p8105_hw1_scl2160_markdown_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 ``` r
 ggsave("scatter_plot.pdf", height = 4, width = 6)
 ggplot(df_p2, aes(x=x, y=y, color = num_vec_2)) + geom_point()
 ```
 
-![](p8105_hw1_scl2160_markdown_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](p8105_hw1_scl2160_markdown_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
 
 ``` r
 ggplot(df_p2, aes(x=x, y=y, color = factor_vec_2)) + geom_point()
 ```
 
-![](p8105_hw1_scl2160_markdown_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+![](p8105_hw1_scl2160_markdown_files/figure-gfm/unnamed-chunk-1-3.png)<!-- -->
 
-Export your first scatterplot to your project directory using ggsave.
+In the second and third plots the scale of our points is 0-1. Both
+appear to be highly segmented between 0s and 1s.
