@@ -85,12 +85,11 @@ My data set has `r nrow(df_p2)` rows and `r ncol(df_p2)` columns. The mean of va
 
 Next I will make a scatterplot of y vs x that color points using the logical, numeric, and factor variables.
 
-```{r}
+```{r scatter_plots}
 ggplot(df_p2, aes(x=x, y=y, color = log_vec_2)) + geom_point()
 ggsave("scatter_plot.pdf", height = 4, width = 6)
 ggplot(df_p2, aes(x=x, y=y, color = num_vec_2)) + geom_point()
 ggplot(df_p2, aes(x=x, y=y, color = factor_vec_2)) + geom_point()
-
 ```
 
 In the second and third plots the scale of our points is 0-1. Both appear to be highly segmented between 0s and 1s.
