@@ -20,14 +20,14 @@ First I am creating a dataframe that meets these requirements:
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ---------------------------------------------------------------------------------- tidyverse 1.2.1 --
+    ## -- Attaching packages -------------------------------------------------------------------- tidyverse 1.2.1 --
 
     ## v ggplot2 3.2.1     v purrr   0.3.2
     ## v tibble  2.1.3     v dplyr   0.8.3
     ## v tidyr   0.8.3     v stringr 1.4.0
     ## v readr   1.3.1     v forcats 0.4.0
 
-    ## -- Conflicts ------------------------------------------------------------------------------------- tidyverse_conflicts() --
+    ## -- Conflicts ----------------------------------------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -39,13 +39,7 @@ df_p1 = tibble(
   char_vec = c("dog","cat", "puppy", "kitten", "eggs", "sandwich", "beer", "pencil"),
   factor_vec = factor(c("pug","lab","chow","chow","lab","chow","pug","lab"))
 )
-```
 
-When I take the mean of each variable in my dataframe I can only get the
-mean of ‘norm\_samp’ and ‘log\_vec’, as they are the only numeric
-variables.
-
-``` r
 mean(pull(df_p1, norm_samp))
 ```
 
@@ -75,9 +69,6 @@ mean(pull(df_p1, factor_vec))
 
     ## [1] NA
 
-Next I will write a code chunk that applies the as.numeric function to
-the logical, character, and factor variables.
-
 ``` r
 echo = FALSE
 as.numeric(pull(df_p1,log_vec))
@@ -98,6 +89,13 @@ as.numeric(pull(df_p1,factor_vec))
 ```
 
     ## [1] 3 2 1 1 2 1 3 2
+
+When I take the mean of each variable in my dataframe I can only get the
+mean of ‘norm\_samp’ and ‘log\_vec’, as they are the only numeric
+variables.
+
+Next I will write a code chunk that applies the as.numeric function to
+the logical, character, and factor variables.
 
 My logic vector and factor vector were able to be converted to numeric,
 but my character variable was not.

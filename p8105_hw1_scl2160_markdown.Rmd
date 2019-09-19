@@ -23,25 +23,21 @@ df_p1 = tibble(
   char_vec = c("dog","cat", "puppy", "kitten", "eggs", "sandwich", "beer", "pencil"),
   factor_vec = factor(c("pug","lab","chow","chow","lab","chow","pug","lab"))
 )
-```
 
-When I take the mean of each variable in my dataframe I can only get the mean of 'norm_samp' and 'log_vec', as they are the only numeric variables.
-
-```{r means}
 mean(pull(df_p1, norm_samp))
 mean(pull(df_p1, log_vec))
 mean(pull(df_p1, char_vec))
 mean(pull(df_p1, factor_vec))
-```
 
-Next I will write a code chunk that applies the as.numeric function to the logical, character, and factor variables.
-
-```{r as_numeric}
 echo = FALSE
 as.numeric(pull(df_p1,log_vec))
 as.numeric(pull(df_p1,char_vec))
 as.numeric(pull(df_p1,factor_vec))
+
 ```
+When I take the mean of each variable in my dataframe I can only get the mean of 'norm_samp' and 'log_vec', as they are the only numeric variables.
+
+Next I will write a code chunk that applies the as.numeric function to the logical, character, and factor variables.
 
 My logic vector and factor vector were able to be converted to numeric, but my character variable was not.
 
