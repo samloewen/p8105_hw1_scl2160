@@ -33,7 +33,7 @@ mean(pull(df_p1, factor_vec))
 ```
 
 ```{r eval = FALSE}
-#Next I will the as.numeric function to my logic, character, and factor vector.
+#Next I will apply the as.numeric function to my logic, character, and factor vector.
 as.numeric(pull(df_p1,log_vec))
 as.numeric(pull(df_p1,char_vec))
 as.numeric(pull(df_p1,factor_vec))
@@ -41,7 +41,7 @@ as.numeric(pull(df_p1,factor_vec))
 
 When I take the mean of each variable in my dataframe I can only get the mean of 'norm_samp' and 'log_vec', as they are the only numeric variables.
 
-Above I applied the as.numeric function to the logical, character, and factor variables.My logic vector and factor vector were able to be converted to numeric, but my character variable was not. The as.numeric function converted both vectors into coded numbers. Because they were able to be converted, we were able to take the mean. The character variable was not able to be converted so we could not take the mean.
+When I attempted to convert my vectors to numeric, my logic vector and factor vector were able to be converted to numeric, but my character variable was not. Because vectors consist of 0a and 1s, they were able to be converted to numeric variables, and therefore we were able to take the mean. A character variable cannot be converted to numberic, so we are not able to take the mean.
 
 I will now: 
 
@@ -89,4 +89,4 @@ ggplot(df_p2, aes(x=x, y=y, color = num_vec_2)) + geom_point()
 ggplot(df_p2, aes(x=x, y=y, color = factor_vec_2)) + geom_point()
 ```
 
-The first and third plots are based on true/false binary vectors, so we only have two colors in our color scale. The second plot is based on a binary vector translated to a numeric variable. Our color scale is a gradient reflecting the range of a numeric variable, but we only see two colors in our plot as the values come from our vector variable (0,1).
+The first and third plots are based on true/false binary vectors, so we only have two colors in our color scale. The second plot is based on a binary vector translated to a numeric variable. Our color scale is a gradient reflecting the range of a numeric variable, but we only see two colors in our plot as the values come from our vector variable (0 or 1).
